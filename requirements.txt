@@ -2,4 +2,8 @@ Flask
 pytz
 requests
 beautifulsoup4
-wikipedia
+google-api-python-client
+google-auth
+google-auth-httplib2
+google-auth-oauthlib
+google-generativeai

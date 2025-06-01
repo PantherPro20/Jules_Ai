@@ -38,21 +38,21 @@ CMD ["flask", "run"]
 # Instructions for user:
 # --------------------
 # To build the image:
-# docker build -t scraper-ai-app .
+# docker build -t ai-query-app . # Changed name slightly for new functionality
 #
-# To run the container (basic):
-# docker run -p 5000:5000 scraper-ai-app
+# To run the container:
+# You MUST provide your API keys as environment variables.
+# Replace 'YOUR_GOOGLE_API_KEY', 'YOUR_GEMINI_API_KEY', and 'YOUR_GOOGLE_CSE_ID'
+# with your actual keys and CSE ID.
 #
-# To run with persistent data (recommended):
-# 1. Create a 'data' directory on your host: mkdir my_persistent_data
-# 2. Run the main_scraper.py to populate it: python scraper/main_scraper.py (ensure its output is in my_persistent_data)
-#    (Or copy your existing data/scraped_data.json into my_persistent_data/scraped_data.json)
-# 3. Run container with volume mount:
-#    docker run -p 5000:5000 -v "$(pwd)/my_persistent_data:/app/data" scraper-ai-app
-#    (Replace $(pwd)/my_persistent_data with the absolute path to your data directory if needed)
+# docker run -p 5000:5000 \
+#   -e GOOGLE_API_KEY='YOUR_GOOGLE_API_KEY' \
+#   -e GEMINI_API_KEY='YOUR_GEMINI_API_KEY' \
+#   -e GOOGLE_CSE_ID='63bdfe80d8bfe4a62' \ # Or your specific CSE ID if different
+#   ai-query-app
 #
 # The web application will be available at http://localhost:5000
 #
-# Note: The main_scraper.py is intended to be run on the host to update the
-# data in the mounted volume, or to update data/scraped_data.json before rebuilding the image.
-# Running scrapers inside the container would require them to also write to this /app/data volume.
+# The application requires these API keys to contact Google Search and Gemini services.
+# The GOOGLE_CSE_ID is pre-filled with the one provided during development (63bdfe80d8bfe4a62),
+# but can also be overridden via the -e flag if needed.

@@ -1,58 +1,55 @@
-# Project Title
+# AI Query Engine with Google Search & Gemini
 
-This project is designed to [briefly describe the project's purpose].
+## Overview
+
+This project is a web application that takes a user's query, performs a Google search to find relevant web pages, fetches content from the top search results, and then uses the Gemini API to generate a concise summary of the combined information. This provides users with quick, AI-powered answers based on real-time web data.
 
 ## Features
 
-* [List key features of the project]
+*   **Real-time Information Lookup:** Utilizes Google Custom Search API to find up-to-date information.
+*   **Content Fetching:** Retrieves textual content from the top search result URLs.
+*   **AI-Powered Summarization:** Leverages the Gemini API to provide concise summaries of the fetched content, tailored to the user's query.
+*   **Web Interface:** Simple Flask-based web UI for submitting queries and viewing results.
+*   **Customizable Appearance:** Users can change the background color of the web interface.
 
 ## Technology Stack
 
-* [List technologies used, e.g., Python, Flask, Docker]
+*   **Backend:** Python, Flask
+*   **APIs:**
+    *   Google Custom Search JSON API (via `google-api-python-client`)
+    *   Google Gemini API (via `google-generativeai`)
+*   **Web Content Fetching:** `requests`, `BeautifulSoup4`
+*   **Deployment:** Docker (optional)
+*   **Timezone Handling:** `pytz`
 
-## Running the Project
+## Setup and Configuration
 
-There are two main ways to run this project: using Docker (recommended for ease of use and consistency) or running the components locally.
+### API Keys
 
-### Running with Docker (Recommended)
+To use this application, you will need API keys for the following Google services:
 
-The `Dockerfile` included in the project sets up the environment and runs the web application.
+1.  **Google Cloud API Key (for Custom Search JSON API):**
+    *   Obtain this from the [Google Cloud Console](https://console.cloud.google.com/). You'll need to enable the "Custom Search API".
+2.  **Google AI Studio API Key (for Gemini API):**
+    *   Obtain this from [Google AI Studio (formerly MakerSuite)](https://aistudio.google.com/).
+3.  **Google Custom Search Engine ID (CSE ID):**
+    *   Create a Custom Search Engine at [Google's Programmable Search Engine control panel](https://programmablesearchengine.google.com/).
+    *   Configure it to search the entire web or specific sites you are interested in.
+    *   The CSE ID can be found in the "Basic Information" section of your search engine's setup. A default CSE ID (`63bdfe80d8bfe4a62`) is provided in the application code as a fallback if the environment variable is not set, but it's highly recommended to use your own.
 
-1.  **Build the Docker image:**
-    ```bash
-    docker build -t scraper-ai-app .
-    ```
+### Environment Variables
 
-2.  **Run the Docker container:**
-    To run the container and have the web application accessible on `http://localhost:5000`:
-    ```bash
-    docker run -p 5000:5000 scraper-ai-app
-    ```
+You **must** set the following environment variables before running the application:
 
-3.  **Running with Persistent Data (Important for Scrapers):**
-    The scrapers generate data that the web application uses. To ensure this data persists and can be updated:
-    *   Create a directory on your host machine to store the data, for example:
-        ```bash
-        mkdir my_persistent_data
-        ```
-    *   **Run the scraper first (on your host machine)** to populate this directory. Ensure the `scraper/main_scraper.py` is configured to output `scraped_data.json` into this `my_persistent_data` directory (or copy it there after running).
-        ```bash
-        python scraper/main_scraper.py
-        # (Then ensure my_persistent_data/scraped_data.json exists)
-        ```
-    *   Run the Docker container with a volume mount:
-        ```bash
-        docker run -p 5000:5000 -v "$(pwd)/my_persistent_data:/app/data" scraper-ai-app
-        ```
-        *(Replace `$(pwd)/my_persistent_data` with the absolute path to your data directory if needed).*
+*   `GOOGLE_API_KEY`: Your Google Cloud API key.
+*   `GEMINI_API_KEY`: Your Google AI Studio (Gemini) API key.
+*   `GOOGLE_CSE_ID`: Your Custom Search Engine ID. (While there's a default, setting this is preferred).
 
-    The web application will be available at `http://localhost:5000`.
-
-### Running Locally (Without Docker)
+## Running Locally
 
 1.  **Prerequisites:**
     *   Python 3.7+
-    *   pip (Python package installer)
+    *   `pip` (Python package installer)
 
 2.  **Set up a Virtual Environment (Recommended):**
     ```bash
@@ -61,22 +58,52 @@ The `Dockerfile` included in the project sets up the environment and runs the we
     ```
 
 3.  **Install Dependencies:**
-    Install the required Python packages from `requirements.txt`:
     ```bash
     pip install -r requirements.txt
     ```
-    *Note: The `webapp` also has its own `requirements.txt` (`webapp/requirements.txt`). For simplicity, the main `requirements.txt` should ideally cover all dependencies. If running components separately, ensure dependencies for each part are installed.*
 
-4.  **Run the Scrapers:**
-    To collect data for the application, run the main scraper script:
-    ```bash
-    python scraper/main_scraper.py
-    ```
-    This will create/update the `data/scraped_data.json` file.
+4.  **Set Environment Variables:**
+    *   **Linux/macOS:**
+        ```bash
+        export GOOGLE_API_KEY='YOUR_GOOGLE_API_KEY'
+        export GEMINI_API_KEY='YOUR_GEMINI_API_KEY'
+        export GOOGLE_CSE_ID='YOUR_CSE_ID' # e.g., 63bdfe80d8bfe4a62
+        ```
+    *   **Windows (PowerShell):**
+        ```powershell
+        $env:GOOGLE_API_KEY='YOUR_GOOGLE_API_KEY'
+        $env:GEMINI_API_KEY='YOUR_GEMINI_API_KEY'
+        $env:GOOGLE_CSE_ID='YOUR_CSE_ID' # e.g., 63bdfe80d8bfe4a62
+        ```
+    *Replace placeholders with your actual keys and ID.*
 
-5.  **Run the Web Application:**
-    Once the data is scraped, you can run the Flask web application:
+5.  **Run the Application:**
     ```bash
     python webapp/app.py
     ```
     The application will typically be available at `http://localhost:5000`.
+
+## Running with Docker
+
+1.  **Build the Docker Image:**
+    ```bash
+    docker build -t ai-query-app .
+    ```
+
+2.  **Run the Docker Container:**
+    You must pass your API keys and CSE ID as environment variables to the container.
+    ```bash
+    docker run -p 5000:5000 \
+      -e GOOGLE_API_KEY='YOUR_GOOGLE_API_KEY' \
+      -e GEMINI_API_KEY='YOUR_GEMINI_API_KEY' \
+      -e GOOGLE_CSE_ID='YOUR_CSE_ID' \
+      ai-query-app
+    ```
+    *Replace `YOUR_GOOGLE_API_KEY`, `YOUR_GEMINI_API_KEY`, and `YOUR_CSE_ID` with your actual credentials.*
+
+## Usage
+
+1.  Open your web browser and navigate to `http://localhost:5000`.
+2.  Enter your query into the input field and press "Send" or hit Enter.
+3.  The application will display a summary based on Google Search results and Gemini AI.
+4.  You can change the timezone and background color using the settings icon in the header.
