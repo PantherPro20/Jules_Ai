@@ -9,6 +9,11 @@ from bs4 import BeautifulSoup
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 import google.generativeai as genai
+from dotenv import load_dotenv
+
+# Load environment variables from .env file if it exists
+# This should be one of the first things done in the script
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24) # Or a fixed secret string for development

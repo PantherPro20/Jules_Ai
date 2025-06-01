@@ -45,6 +45,29 @@ You **must** set the following environment variables before running the applicat
 *   `GEMINI_API_KEY`: Your Google AI Studio (Gemini) API key.
 *   `GOOGLE_CSE_ID`: Your Custom Search Engine ID. (While there's a default, setting this is preferred).
 
+### Using a `.env` File for API Keys (Local Development)
+
+For local development, you can use a `.env` file to manage your API keys conveniently. The application will automatically load variables defined in this file thanks to the `python-dotenv` library.
+
+1.  **Create a file named `.env`** in the root directory of the project (the same directory as `requirements.txt` and `webapp/`).
+
+2.  **Add your API keys** to the `.env` file in the following format:
+    ```env
+    GOOGLE_API_KEY='YourActualGoogleApiKey'
+    GEMINI_API_KEY='YourActualGeminiApiKey'
+    GOOGLE_CSE_ID='YourActualGoogleCseId'
+    ```
+    Replace the placeholder values with your actual keys and ID. Do not use quotes around the values in the `.env` file unless they are part of the key itself (which is rare). For example:
+    ```env
+    GOOGLE_API_KEY=YourActualGoogleApiKeyWithoutQuotes
+    GEMINI_API_KEY=YourActualGeminiApiKeyWithoutQuotes
+    GOOGLE_CSE_ID=YourActualGoogleCseIdWithoutQuotes
+    ```
+
+3.  **Security Note:** The `.env` file is included in `.gitignore` (as of a previous setup step), so it will not (and should not) be committed to your Git repository. This keeps your secrets safe.
+
+When you run `python webapp/app.py` locally, these variables will be loaded into the environment and used by the application. For Docker deployments, you should still pass environment variables using the `-e` flag as described in the "Running with Docker" section, as the `.env` file is not copied into the Docker image for security and best practices.
+
 ## Running Locally
 
 1.  **Prerequisites:**

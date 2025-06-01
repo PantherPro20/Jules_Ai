@@ -1,0 +1,38 @@
+# Environment variables
+.env
+
+# Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+ENV/
+env/
+pip-wheel-metadata/
+.Python
+
+# IDE / Editor specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Docker local files (if any specific ones, usually covered by .dockerignore for build context)
+# For example, if you had local docker-compose overrides:
+# docker-compose.override.yml
+
+# Test outputs / coverage reports
+htmlcov/
+.coverage
+pytest_cache/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
