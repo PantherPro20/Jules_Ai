@@ -5,9 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const settingsModal = document.getElementById('settings-modal');
     const closeModalButton = settingsModal.querySelector('.close-button');
     const timezoneInput = document.getElementById('timezone-input');
-    const saveSettingsButton = document.getElementById('save-settings');
-    const settingsMessage = document.getElementById('settings-message');
+    const saveSettingsButton = document.getElementById('save-settings'); // This ID is in the HTML for the main save button in the modal
+    const settingsMessage = document.getElementById('settings-message'); // This ID is in the HTML
     const queryInput = document.getElementById('query-input');
+    // --- New Elements for Background Settings ---
+    const backgroundColorPicker = document.getElementById('backgroundColorPicker');
+    const backgroundColorHex = document.getElementById('backgroundColorHex');
     const submitQueryButton = document.getElementById('submit-query');
     const resultsArea = document.getElementById('results-area');
     const scrapedDataPreviewArea = document.getElementById('scraped-data-preview'); // New area to populate
@@ -20,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         timezoneInput.value = currentTz || '';
         settingsMessage.textContent = '';
         settingsModal.style.display = 'flex';
+        loadAppearanceSettings(); // Load current appearance settings when modal opens
     }
 
     function closeSettingsModal() {
@@ -52,28 +56,138 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function handleSaveSettings() {
+        // Timezone Saving Part (existing logic)
+        let timezoneSaved = false;
         const newTimezone = timezoneInput.value.trim();
-        if (!newTimezone) {
-            settingsMessage.textContent = 'Please enter a timezone or city name.';
-            settingsMessage.style.color = 'red'; return;
-        }
-        try {
-            const validationResponse = await fetch(`/api/validate_timezone?tz=${encodeURIComponent(newTimezone)}`);
-            const validationData = await validationResponse.json();
-            if (!validationResponse.ok || !validationData.is_valid) {
-                settingsMessage.textContent = validationData.error || 'Invalid timezone (e.g., "America/New_York").';
-                settingsMessage.style.color = 'red'; return;
+        if (newTimezone) { // Only save if there's a value, allowing users to only save appearance
+            try {
+                const validationResponse = await fetch(`/api/validate_timezone?tz=${encodeURIComponent(newTimezone)}`);
+                const validationData = await validationResponse.json();
+                if (!validationResponse.ok || !validationData.is_valid) {
+                    settingsMessage.textContent = validationData.error || 'Invalid timezone (e.g., "America/New_York").';
+                    settingsMessage.style.color = 'red';
+                    // Do not return yet, try saving appearance settings
+                } else {
+                    localStorage.setItem(TIMEZONE_KEY, newTimezone);
+                    fetchAndUpdateTime(); // Update time immediately
+                    timezoneSaved = true;
+                }
+            } catch (error) {
+                console.error("Error validating timezone:", error);
+                settingsMessage.textContent = 'Could not validate timezone. Appearance settings might still be saved.';
+                settingsMessage.style.color = 'red';
             }
-            localStorage.setItem(TIMEZONE_KEY, newTimezone);
-            settingsMessage.textContent = 'Settings saved!';
-            settingsMessage.style.color = 'green';
-            fetchAndUpdateTime();
-            setTimeout(closeSettingsModal, 1000);
-        } catch (error) {
-            console.error("Error validating timezone:", error);
-            settingsMessage.textContent = 'Could not validate timezone.';
-            settingsMessage.style.color = 'red';
         }
+
+        // Appearance Saving Part (new logic)
+        let appearanceSaved = await saveAppearanceSettings();
+
+        if (timezoneSaved && appearanceSaved) {
+            settingsMessage.textContent = 'All settings saved!';
+            settingsMessage.style.color = 'green';
+            setTimeout(closeSettingsModal, 1500);
+        } else if (timezoneSaved) {
+            settingsMessage.textContent = 'Timezone saved! (Appearance not saved or no change)';
+            settingsMessage.style.color = 'green';
+            setTimeout(closeSettingsModal, 1500);
+        } else if (appearanceSaved) {
+            // Message for appearance saved is handled by saveAppearanceSettings
+            setTimeout(closeSettingsModal, 1500);
+        } else if (!newTimezone && !appearanceSaved) {
+             settingsMessage.textContent = 'No changes to save.';
+             settingsMessage.style.color = 'orange';
+        }
+        // If only one failed, specific error message would have been set by the failed function
+    }
+
+    // --- New Functions for Appearance Settings ---
+    function getContrastingTextColor(hexColor) {
+        if (!hexColor) return '#000000';
+        const hex = hexColor.replace('#', '');
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        return luminance > 0.5 ? '#000000' : '#FFFFFF';
+    }
+
+    function applySettings(bgColor) {
+        document.body.style.backgroundColor = bgColor;
+        const textColor = getContrastingTextColor(bgColor);
+        document.body.style.color = textColor;
+        // Example for specific elements:
+        // document.querySelectorAll('.card, .modal-content, .app-header').forEach(el => {
+        // el.style.borderColor = textColor === '#000000' ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.2)';
+        // });
+        // More targeted styling might be needed for specific components to ensure readability
+    }
+
+    async function loadAppearanceSettings() {
+        try {
+            const response = await fetch('/api/settings');
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const settings = await response.json();
+            if (settings.background_color) {
+                applySettings(settings.background_color);
+                if (backgroundColorPicker) backgroundColorPicker.value = settings.background_color;
+                if (backgroundColorHex) backgroundColorHex.value = settings.background_color;
+            }
+        } catch (error) {
+            console.error("Error loading appearance settings:", error);
+            // Don't show modal message here, as it might be confusing during initial page load
+        }
+    }
+
+    async function saveAppearanceSettings() {
+        const colorToSave = backgroundColorHex.value.trim() || backgroundColorPicker.value;
+        if (!colorToSave.match(/^#[0-9a-fA-F]{6}$/i) && !colorToSave.match(/^#[0-9a-fA-F]{3}$/i) ) {
+            if(backgroundColorHex.value.trim()){ // only show error if user typed something invalid
+                 settingsMessage.textContent = 'Invalid HEX color format (e.g., #RRGGBB).';
+                 settingsMessage.style.display = 'block';
+                 settingsMessage.style.color = 'red';
+            }
+            return false; // Indicate save failed or no valid color to save
+        }
+
+        try {
+            const response = await fetch('/api/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ background_color: colorToSave }),
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const result = await response.json();
+            applySettings(colorToSave);
+            if (settingsMessage) {
+                settingsMessage.textContent = result.message || 'Appearance settings saved!';
+                settingsMessage.style.display = 'block';
+                settingsMessage.style.color = 'green';
+                // setTimeout(() => { settingsMessage.style.display = 'none'; }, 3000); // Timeout handled by main save
+            }
+            return true; // Indicate save success
+        } catch (error) {
+            console.error("Error saving appearance settings:", error);
+            if (settingsMessage) {
+                settingsMessage.textContent = 'Error saving appearance settings.';
+                settingsMessage.style.display = 'block';
+                settingsMessage.style.color = 'red';
+            }
+            return false; // Indicate save failed
+        }
+    }
+
+    // Event Listeners for Appearance
+    if (backgroundColorPicker) {
+        backgroundColorPicker.addEventListener('input', () => {
+            if (backgroundColorHex) backgroundColorHex.value = backgroundColorPicker.value;
+        });
+    }
+    if (backgroundColorHex) {
+        backgroundColorHex.addEventListener('input', () => {
+            if (backgroundColorHex.value.match(/^#[0-9a-fA-F]{6}$/i) || backgroundColorHex.value.match(/^#[0-9a-fA-F]{3}$/i)) {
+                if (backgroundColorPicker) backgroundColorPicker.value = backgroundColorHex.value;
+            }
+        });
     }
 
     settingsButton.addEventListener('click', openSettingsModal);
@@ -205,4 +319,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial calls
     loadScrapedDataPreview(); // Load preview data on page load
+    loadAppearanceSettings(); // Load appearance settings on page load
 });

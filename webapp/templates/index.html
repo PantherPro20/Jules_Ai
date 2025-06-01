@@ -54,10 +54,22 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3>Settings</h3>
-            <label for="timezone-input">Enter City or Timezone (e.g., "New York", "Europe/London"):</label>
-            <input type="text" id="timezone-input" placeholder="e.g., America/New_York">
+            <div class="setting-item">
+                <label for="timezone-input">Enter City or Timezone (e.g., "New York", "Europe/London"):</label>
+                <input type="text" id="timezone-input" placeholder="e.g., America/New_York">
+            </div>
+            <hr>
+            <h4>Appearance</h4>
+            <div class="setting-item">
+                <label for="backgroundColorPicker">Choose Background Color:</label>
+                <input type="color" id="backgroundColorPicker" value="#FFFFFF">
+            </div>
+            <div class="setting-item">
+                <label for="backgroundColorHex">Or Enter HEX Code:</label>
+                <input type="text" id="backgroundColorHex" placeholder="#FFFFFF" pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$">
+            </div>
             <button id="save-settings">Save Settings</button>
-            <p id="settings-message"></p>
+            <p id="settings-message" class="settings-message" style="display:none;"></p>
         </div>
     </div>
 

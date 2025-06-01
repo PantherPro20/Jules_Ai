@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, session
 import json
 import os
 import datetime
@@ -6,6 +6,7 @@ import pytz # For timezone handling
 import re # For simple tokenization and keyword extraction
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24) # Or a fixed secret string for development
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, "../data/scraped_data.json")
@@ -155,6 +156,18 @@ def handle_query():
         app.logger.error(f"Error in /api/query: {e}", exc_info=True) # Log the full error
         return jsonify({"error": "An internal error occurred processing your query: " + str(e)}), 500
 
+@app.route('/api/settings', methods=['GET', 'POST'])
+def manage_settings():
+    if request.method == 'POST':
+        data = request.get_json()
+        if data and 'background_color' in data:
+            session['background_color'] = data['background_color']
+            return jsonify({"message": "Settings saved successfully.", "background_color": data['background_color']})
+        return jsonify({"error": "Invalid data. 'background_color' missing."}), 400
+
+    if request.method == 'GET':
+        background_color = session.get('background_color', '#FFFFFF') # Default to white if not set
+        return jsonify({"background_color": background_color})
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
