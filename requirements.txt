@@ -1,0 +1,5 @@
+Flask
+pytz
+requests
+beautifulsoup4
+wikipedia

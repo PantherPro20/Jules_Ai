@@ -1,0 +1,246 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #E1F5FE; /* Sky blue (Material Design Light Blue 100) */
+    margin: 0;
+    color: #37474F; /* Blue Grey 800 */
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px; /* Space from top */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px; /* Max width for larger screens */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Contains child elements */
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: #0277BD; /* Light Blue 700 */
+    color: #FFFFFF;
+}
+
+.logo-title h2 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.5em;
+}
+.logo-title i {
+    margin-right: 8px;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+}
+
+#time-display {
+    font-size: 1em;
+    margin-right: 20px;
+    font-weight: 400;
+}
+
+#settings-button {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.4em;
+    cursor: pointer;
+    padding: 5px;
+}
+#settings-button:hover {
+    color: #B3E5FC; /* Light Blue 100 */
+}
+
+.main-content {
+    padding: 25px;
+}
+
+.qa-section {
+    margin-bottom: 30px;
+    background-color: #F8F9FA; /* Light grey background for QA section */
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.input-area {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#query-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #CFD8DC; /* Blue Grey 100 */
+    border-radius: 4px 0 0 4px;
+    font-size: 1em;
+    outline: none;
+}
+#query-input:focus {
+    border-color: #0288D1; /* Light Blue 600 */
+    box-shadow: 0 0 0 2px rgba(2, 136, 209, 0.2);
+}
+
+#submit-query {
+    padding: 12px 20px;
+    background-color: #0288D1; /* Light Blue 600 */
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+#submit-query:hover {
+    background-color: #0277BD; /* Light Blue 700 */
+}
+#submit-query i {
+    margin-right: 5px;
+}
+
+
+.results-area, .scraped-data-preview {
+    min-height: 100px; /* Placeholder height */
+    padding: 15px;
+    background-color: #FFFFFF;
+    border: 1px solid #ECEFF1; /* Blue Grey 50 */
+    border-radius: 4px;
+}
+.results-area .placeholder-text, .scraped-data-preview .placeholder-text {
+    color: #78909C; /* Blue Grey 300 */
+    font-style: italic;
+}
+
+.scraped-data-preview-section h3 {
+    font-weight: 500;
+    color: #0277BD; /* Light Blue 700 */
+    margin-bottom: 10px;
+}
+
+/* Individual result item styling (anticipating JS rendering) */
+.result-item, .data-item {
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0; /* Grey 300 */
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.result-item h4, .data-item h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #00796B; /* Teal 700 */
+}
+.result-item p, .data-item p {
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    color: #546E7A; /* Blue Grey 600 */
+}
+.result-item a, .data-item a {
+    color: #0288D1; /* Light Blue 600 */
+    text-decoration: none;
+    font-weight: 500;
+}
+.result-item a:hover, .data-item a:hover {
+    text-decoration: underline;
+}
+.result-item .source, .data-item .source {
+    font-size: 0.8em;
+    color: #90A4AE; /* Blue Grey 200 */
+    display: block; /* On its own line */
+    margin-top: 5px;
+}
+
+
+.app-footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9em;
+    color: #78909C; /* Blue Grey 300 */
+    background-color: #ECEFF1; /* Blue Grey 50 */
+    border-top: 1px solid #CFD8DC; /* Blue Grey 100 */
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* Dim background */
+    align-items: center; /* Vertical center */
+    justify-content: center; /* Horizontal center */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative; /* For close button positioning */
+}
+
+.close-button {
+    color: #aaa;
+    float: right; /* Old school, but effective for modals */
+    position: absolute; /* More precise control */
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+#settings-modal h3 {
+    margin-top: 0;
+    color: #0277BD;
+}
+#settings-modal label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+#settings-modal input[type="text"] {
+    width: calc(100% - 22px); /* Account for padding */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #CFD8DC;
+    border-radius: 4px;
+}
+#settings-modal button {
+    background-color: #0288D1;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#settings-modal button:hover {
+    background-color: #0277BD;
+}
+#settings-message {
+    margin-top: 15px;
+    font-size: 0.9em;
+}

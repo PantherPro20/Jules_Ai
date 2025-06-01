@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Scraper Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div class="logo-title">
+                <!-- Could be an SVG or image logo later -->
+                <h2><i class="fas fa-robot"></i> Scraper AI</h2>
+            </div>
+            <div class="header-controls">
+                <div id="time-display">--:--:--</div>
+                <button id="settings-button" aria-label="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="qa-section">
+                <div class="input-area">
+                    <input type="text" id="query-input" placeholder="Ask about the scraped data...">
+                    <button id="submit-query"><i class="fas fa-paper-plane"></i> Send</button>
+                </div>
+                <div id="results-area" class="results-area">
+                    <!-- Q&A results will appear here -->
+                    <p class="placeholder-text">Enter a query to see results.</p>
+                </div>
+            </div>
+
+            <div class="scraped-data-preview-section">
+                <h3>Recently Scraped</h3>
+                <div id="scraped-data-preview" class="scraped-data-preview">
+                    <!-- Scraped data items will be listed here -->
+                    <p class="placeholder-text">Loading recent data...</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>&copy; 2023 Scraper AI Project</p>
+        </footer>
+    </div>
+
+    <!-- Modal for settings -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Settings</h3>
+            <label for="timezone-input">Enter City or Timezone (e.g., "New York", "Europe/London"):</label>
+            <input type="text" id="timezone-input" placeholder="e.g., America/New_York">
+            <button id="save-settings">Save Settings</button>
+            <p id="settings-message"></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+[
+    {
+        "title": "Artificial intelligence",
+        "summary": "Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-solving, perception, and decision-making. It is a field of research in computer science that develops and studies methods and software that enable machines to perceive their environment and use learning and intelligence to take actions that maximize their chances of achieving defined goals.\nHigh-profile applications of AI include advanced web search engines (e.g., Google Search); recommendation systems (used by YouTube, Amazon, and Netflix); virtual assistants (e.g., Google Assistant, Siri, and Alexa); autonomous vehicles (e.g., Waymo); generative and creative tools (e.g., ChatGPT and AI art); and superhuman play and analysis in strategy games (e.g., chess and Go).",
+        "url": "https://en.wikipedia.org/wiki/Artificial_intelligence",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:57:47.920881Z"
+    },
+    {
+        "title": "Artificial general intelligence",
+        "summary": "Artificial general intelligence (AGI)—sometimes called human‑level intelligence AI—is a type of artificial intelligence that would match or surpass human capabilities across virtually all cognitive tasks.\nSome researchers argue that state‑of‑the‑art large language models already exhibit early signs of AGI‑level capability, while others maintain that genuine AGI has not yet been achieved. AGI is conceptually distinct from artificial superintelligence (ASI), which would outperform the best human abilities across every domain by a wide margin.",
+        "url": "https://en.wikipedia.org/wiki/Artificial_general_intelligence",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:57:48.472336Z"
+    },
+    {
+        "title": "Generative artificial intelligence",
+        "summary": "Generative artificial intelligence (Generative AI, GenAI, or GAI) is a subfield of artificial intelligence that uses generative models to produce text, images, videos, or other forms of data. These models learn the underlying patterns and structures of their training data and use them to produce new data based on the input, which often comes in the form of natural language prompts.\nGenerative AI tools have become more common since an \"AI boom\" in the 2020s.",
+        "url": "https://en.wikipedia.org/wiki/Generative_artificial_intelligence",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:57:49.018173Z"
+    },
+    {
+        "title": "Applications of artificial intelligence",
+        "summary": "Artificial intelligence (AI) has been used in applications throughout industry and academia. In a manner analogous to electricity or computers, AI serves as a general-purpose technology. AI programs are designed to simulate human perception and understanding.",
+        "url": "https://en.wikipedia.org/wiki/Applications_of_artificial_intelligence",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:57:49.563347Z"
+    },
+    {
+        "title": "History of artificial intelligence",
+        "summary": "The history of artificial intelligence (AI) began in antiquity, with myths, stories, and rumors of artificial beings endowed with intelligence or consciousness by master craftsmen. The study of logic and formal reasoning from antiquity to the present led directly to the invention of the programmable digital computer in the 1940s, a machine based on abstract mathematical reasoning. This device and the ideas behind it inspired scientists to begin discussing the possibility of building an electronic brain.",
+        "url": "https://en.wikipedia.org/wiki/History_of_artificial_intelligence",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:57:50.104785Z"
+    },
+    {
+        "title": "Python (programming language)",
+        "summary": "Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation.\nPython is dynamically type-checked and garbage-collected.",
+        "url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:57:52.550690Z"
+    },
+    {
+        "title": "History of Python",
+        "summary": "The programming language Python was conceived in the late 1980s, and its implementation was started in December 1989 by Guido van Rossum at CWI in the Netherlands as a successor to ABC capable of exception handling and interfacing with the Amoeba operating system. Van Rossum was Python's principal author and had a central role in deciding the direction of Python (as reflected in the title given to him by the Python community, Benevolent Dictator for Life (BDFL)) until stepping down as leader on July 12, 2018. Python was named after the BBC TV show Monty Python's Flying Circus.",
+        "url": "https://en.wikipedia.org/wiki/History_of_Python",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:57:53.075138Z"
+    },
+    {
+        "title": "Mojo (programming language)",
+        "summary": "Mojo is a programming language in the Python family that is currently under development. It is available both in browsers via Jupyter notebooks, and locally on Linux and macOS. Mojo aims to combine the usability of a high-level programming language, specifically Python, with the performance of a system programming language such as C++, Rust, and Zig. As of February 2025, the Mojo compiler is closed source with an open source standard library.",
+        "url": "https://en.wikipedia.org/wiki/Mojo_(programming_language)",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:57:53.599683Z"
+    },
+    {
+        "title": "Python syntax and semantics",
+        "summary": "The syntax of the Python programming language is the set of rules that defines how a Python program will be written and interpreted (by both the runtime system and by human readers). The Python language has many similarities to Perl, C, and Java. However, there are some definite differences between the languages.",
+        "url": "https://en.wikipedia.org/wiki/Python_syntax_and_semantics",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:57:54.147839Z"
+    },
+    {
+        "title": "General-purpose programming language",
+        "summary": "In computer software, a general-purpose programming language (GPL) is a programming language for building software in a wide variety of application domains. Conversely, a domain-specific programming language (DSL) is used within a specific area. For example, Python is a GPL, while SQL is a DSL for querying relational databases.",
+        "url": "https://en.wikipedia.org/wiki/General-purpose_programming_language",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:57:59.692852Z"
+    },
+    {
+        "title": "Web scraping",
+        "summary": "Web scraping, web harvesting, or web data extraction is data scraping used for extracting data from websites. Web scraping software may directly access the World Wide Web using the Hypertext Transfer Protocol or a web browser. While web scraping can be done manually by a software user, the term typically refers to automated processes implemented using a bot or web crawler.",
+        "url": "https://en.wikipedia.org/wiki/Web_scraping",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:58:20.660502Z"
+    },
+    {
+        "title": "Data scraping",
+        "summary": "Data scraping is a technique where a computer program extracts data from human-readable output coming from another program.\n\n\n== Description ==\nNormally, data transfer between programs is accomplished using data structures suited for automated processing by computers, not people.  Such interchange formats and protocols are typically rigidly structured, well-documented, easily parsed, and minimize ambiguity.",
+        "url": "https://en.wikipedia.org/wiki/Data_scraping",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:58:21.234322Z"
+    },
+    {
+        "title": "Beautiful Soup (HTML parser)",
+        "summary": "Beautiful Soup is a Python package for parsing HTML and XML documents, including those with malformed markup. It creates a parse tree for documents that can be used to extract data from HTML, which is useful for web scraping.\n\n\n== History ==\nBeautiful Soup was started in 2004 by Leonard Richardson.",
+        "url": "https://en.wikipedia.org/wiki/Beautiful_Soup_(HTML_parser)",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:58:21.796975Z"
+    },
+    {
+        "title": "Contact scraping",
+        "summary": "In online advertising, contact scraping is the practice of obtaining access to a customer's e-mail account in order to retrieve contact information that is then used for marketing purposes.\nThe New York Times refers to the practices of Tagged, MyLife and desktopdating.net as \"contact scraping\".\nSeveral commercial packages are available that implement contact scraping for their customers, including ViralInviter, TrafficXplode, and TheTsunamiEffect.",
+        "url": "https://en.wikipedia.org/wiki/Contact_scraping",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:58:22.332524Z"
+    },
+    {
+        "title": "Search engine scraping",
+        "summary": "Search engine scraping is the process of harvesting URLs, descriptions, or other information from search engines. This is a specific form of screen scraping or web scraping dedicated to search engines only.\nMost commonly larger search engine optimization (SEO) providers depend on regularly scraping keywords from search engines to monitor the competitive position of their customers' websites for relevant keywords or their indexing status.",
+        "url": "https://en.wikipedia.org/wiki/Search_engine_scraping",
+        "source": "Wikipedia",
+        "scraped_at": "2025-06-01T16:58:22.893077Z"
+    },
+    {
+        "title": "In Iowa, Trump‚Äôs agenda collides with 2028 ambitions",
+        "summary": "Summary not readily available from headlines page.",
+        "url": "https://www.cnn.com/2025/05/31/politics/iowa-2028-candidates-trump-election-trump",
+        "source": "CNN News",
+        "scraped_at": "2025-06-01T17:00:11.014749Z"
+    },
+    {
+        "title": "OAN Pentagon correspondent fired",
+        "summary": "Summary not readily available from headlines page.",
+        "url": "https://www.cnn.com/2025/05/31/media/gabrielle-cuccia-oan-pentagon-maga-fired-hegseth",
+        "source": "CNN News",
+        "scraped_at": "2025-06-01T17:00:11.014815Z"
+    },
+    {
+        "title": "Archaeologists found a strange red mark on rock. Forensic police helped them unravel who made it",
+        "summary": "Summary not readily available from headlines page.",
+        "url": "https://www.cnn.com/2025/05/29/science/neanderthal-complete-fingerprint-stone-art-scli-intl",
+        "source": "CNN News",
+        "scraped_at": "2025-06-01T17:00:11.014857Z"
+    },
+    {
+        "title": "A reservoir of gold lies hidden in Earth‚Äôs core. Scientists say it‚Äôs leaking",
+        "summary": "Summary not readily available from headlines page.",
+        "url": "https://www.cnn.com/2025/05/30/science/earth-core-leaking-gold",
+        "source": "CNN News",
+        "scraped_at": "2025-06-01T17:00:11.014892Z"
+    },
+    {
+        "title": "This California community is arguably the most famous ‚Äògayborhood‚Äô in the US",
+        "summary": "Summary not readily available from headlines page.",
+        "url": "https://www.cnn.com/travel/castro-san-francisco-lgbt-neighborhood",
+        "source": "CNN News",
+        "scraped_at": "2025-06-01T17:00:11.014928Z"
+    }
+]

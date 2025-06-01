@@ -1,0 +1,9 @@
+.git
+.gitignore
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+# Add any other files/directories to ignore if necessary, e.g., virtual environments
+# .venv/
+# venv/
