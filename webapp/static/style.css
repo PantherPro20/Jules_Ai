@@ -216,15 +216,15 @@ body {
     margin-top: 0;
     color: #0277BD;
 }
-#settings-modal label {
+#settings-modal label { /* General label styling within the modal */
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
 }
-#settings-modal input[type="text"] {
+#settings-modal input[type="text"] { /* General text input styling within the modal */
     width: calc(100% - 22px); /* Account for padding */
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Default bottom margin for text inputs */
     border: 1px solid #CFD8DC;
     border-radius: 4px;
 }
@@ -240,7 +240,70 @@ body {
 #settings-modal button:hover {
     background-color: #0277BD;
 }
-#settings-message {
+#settings-message { /* This is the existing one, will be styled by new .settings-message too */
     margin-top: 15px;
     font-size: 0.9em;
+}
+
+/* --- Appended CSS for new settings elements --- */
+
+/* General item styling within the settings panel (modal) */
+.setting-item {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+}
+
+.setting-item label { /* Specific to new items, if different from #settings-modal label */
+    margin-bottom: 5px;
+    font-weight: bold; /* Make it bold to differentiate if needed */
+    color: #555; /* Or inherit from body/modal. Default modal label is 500 weight, not bold */
+}
+
+.setting-item input[type="color"] {
+    width: 100px; /* Or adjust as needed */
+    height: 30px;
+    padding: 0; /* Remove default padding for color input */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Add some margin below color picker */
+}
+
+.setting-item input[type="text"] { /* This will apply to new text inputs in .setting-item */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em; /* Ensure it's not too small */
+    /* width: auto; /* Let it be sized by flex or specific needs, not full width like timezone */
+    margin-bottom: 10px; /* Add some margin below text input for color HEX */
+}
+
+
+/* Settings message paragraph for feedback - this might enhance existing #settings-message */
+.settings-message { /* This class was added to the <p id="settings-message"> in index.html */
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* Specific styles for success/error messages if not handled by JS already for color */
+/* .settings-message.success { background-color: #e6ffed; color: #28a745; } */
+/* .settings-message.error { background-color: #ffe6e6; color: #dc3545; } */
+
+/* A horizontal rule for visual separation in settings modal */
+#settings-modal hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#settings-modal h4 { /* For "Appearance" subheading */
+    margin-top: 0px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: #0277BD; /* Match h3 style */
 }
